@@ -9,7 +9,10 @@
 
 {% block titulo %}
  <h1 class="mt-4"> VLANS  </h1>
- <h5 class="mt-4"> Buscar, crear y editar VLANS </h5>
+ 
+ <form action= "{% url 'vlansForm' %}">
+    <input type="submit" value="Cargar Vlans" />
+ </form>
 
 {% endblock titulo %}
 
@@ -19,7 +22,7 @@
     <thead>
         <tr>
             <th>Id</th>
-            <th>vlan_nombre</th>
+            <th>vlan_name</th>
             <th>vlan_tag</th>
             <th>vlan_desc</th>
         </tr>
@@ -28,7 +31,7 @@
     {% for c in vlans  %}
         <tr>
             <td>{{ c.id }}</td>
-            <td>{{ c.vlan_nombre }}</td>
+            <td>{{ c.vlan_name }}</td>
             <td>{{ c.vlan_tag }}</td>
             <td>{{ c.vlan_desc }}</td>
         </tr>

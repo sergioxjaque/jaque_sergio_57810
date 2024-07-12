@@ -9,7 +9,7 @@ class Hosts(models.Model):
     host_vlan = models.IntegerField()
 
 class Vlans(models.Model):
-    vlan_nombre = models.CharField(max_length=60)
+    vlan_name = models.CharField(max_length=60)
     vlan_tag = models.IntegerField()
     vlan_desc = models.CharField(max_length=60)
 

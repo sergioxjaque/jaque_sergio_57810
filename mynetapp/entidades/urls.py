@@ -13,5 +13,6 @@ urlpatterns = [
     path('hostsForm/', hostsForm, name="hostsForm"),
     path('buscarHosts/', buscarHosts, name="buscarHosts"),
     path('listarHosts/', listarHosts, name="listarHosts"),
+    path('vlansForm/', vlansForm, name="vlansForm"),
    
 ]

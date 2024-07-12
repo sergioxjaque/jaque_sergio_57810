@@ -6,5 +6,9 @@ class HostsForm(forms.Form):
     host_vlan = forms.IntegerField(required=True, label="VLAN TAG")
 
 
+class VlansForm(forms.Form):
+    vlan_name = forms.CharField(max_length=50, required=True, label="Nombre VLAN")
+    vlan_tag = forms.IntegerField(required=True, label="VLAN TAG")
+    vlan_desc = forms.CharField(max_length=60)
 
     

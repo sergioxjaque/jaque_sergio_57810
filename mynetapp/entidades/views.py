@@ -39,6 +39,23 @@ def hostsForm(request):
     return render(request, "entidades/hostsForm.html", {"form": miForm})
 
 
+def vlansForm(request):
+    if request.method == "POST":
+        miForm = VlansForm(request.POST)
+        if miForm.is_valid():
+            vlan_name_form = miForm.cleaned_data.get("vlan_name")
+            vlan_tag_form = miForm.cleaned_data.get("vlan_tag")
+            vlan_desc_form = miForm.cleaned_data.get("vlan_desc")
+            vlans = Vlans(vlan_name=vlan_name_form, vlan_tag=vlan_tag_form, vlan_desc=vlan_desc_form )
+            vlans.save()
+            contexto = {"vlans": Vlans.objects.all() }
+            return render(request, "entidades/vlans.html", contexto)
+    else:
+        miForm = VlansForm()
+    
+    return render(request, "entidades/vlansForm.html", {"form": miForm})
+
+
 def buscarHosts(request):
     return render(request, "entidades/buscarHosts.html")
 
