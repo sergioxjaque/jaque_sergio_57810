@@ -1,0 +1,47 @@
+
+{% extends "entidades/index.html" %}
+
+<ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+    <li class="nav-item active"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+    
+</ul>
+
+
+
+{% block titulo %}
+ <h1 class="mt-4"> Hosts </h1>
+ 
+ <form action= "{% url 'hostsForm' %}">
+    <input type="submit" value="Cargar Hosts" />
+ </form>
+
+ <form action= "{% url 'buscarHosts' %}">
+    <input type="submit" value="Buscar Hosts" />
+ </form>
+
+{% endblock titulo %}
+
+{% block contenido %}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>host_name</th>
+            <th>host_ip</th>
+            <th>host_vlan</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for c in hosts  %}
+        <tr>
+            <td>{{ c.id }}</td>
+            <td>{{ c.host_name }}</td>
+            <td>{{ c.host_ip }}</td>
+            <td>{{ c.host_vlan }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+     
+{% endblock contenido %}

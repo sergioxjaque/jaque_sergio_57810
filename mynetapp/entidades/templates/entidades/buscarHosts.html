@@ -1,0 +1,26 @@
+{% extends "entidades/index.html" %}
+
+<ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+    <li class="nav-item active"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+    
+   
+</ul>
+
+
+
+{% block titulo %}
+ <h1 class="mt-4"> Buscar Hosts </h1>
+ 
+{% endblock titulo %}
+
+{% block contenido %}
+
+<form action="{% url 'listarHosts' %}" method="get">
+    {% csrf_token %}
+    <table>
+        <p>Ingrese un valor de referencia para la búsqueda: <input type="text" name="buscar" id="buscar"></p>
+    </table>
+    <input type="submit" value="Buscar">
+</form>
+  
+{% endblock contenido %}
