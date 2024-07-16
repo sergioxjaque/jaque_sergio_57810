@@ -16,8 +16,12 @@ def vlans(request):
     return render(request, "entidades/vlans.html", contexto)
 
 def owners(request):
-    contexto = {"vlans": Owners.objects.all()}
+    contexto = {"owners": Owners.objects.all()}
     return render(request, "entidades/owners.html", contexto)
+
+def torresops(request):
+    contexto = {"torresops": TorresOps.objects.all()}
+    return render(request, "entidades/torresops.html", contexto)
 
 def acerca(request):
     return render(request, "entidades/acerca.html")
@@ -68,3 +72,37 @@ def listarHosts(request):
         contexto = {'hosts': Hosts.objects.all()}
         
     return render(request, "entidades/hosts.html", contexto)
+
+
+def ownersForm(request):
+    if request.method == "POST":
+        miForm = OwnersForm(request.POST)
+        if miForm.is_valid():
+            responsables_own_form = miForm.cleaned_data.get("responsables_own")
+            proyecto_own_form = miForm.cleaned_data.get("proyecto_own")
+            contacto_own_form = miForm.cleaned_data.get("contacto_own")
+            owners = Owners(responsables_own=responsables_own_form, proyecto_own=proyecto_own_form, contacto_own=contacto_own_form )
+            owners.save()
+            contexto = {"owners": Owners.objects.all() }
+            return render(request, "entidades/owners.html", contexto)
+    else:
+        miForm = OwnersForm()
+    
+    return render(request, "entidades/ownersForm.html", {"form": miForm})
+
+
+def torresopsForm(request):
+    if request.method == "POST":
+        miForm = TorresOpsForm(request.POST)
+        if miForm.is_valid():
+            operadores_ops_form = miForm.cleaned_data.get("operadores_ops")
+            team_ops_form = miForm.cleaned_data.get("team_ops")
+            contacto_ops_form = miForm.cleaned_data.get("contacto_ops")
+            torres = TorresOps(operadores_ops=operadores_ops_form, team_ops=team_ops_form, contacto_ops=contacto_ops_form )
+            torres.save()
+            contexto = {"torresops": TorresOps.objects.all() }
+            return render(request, "entidades/torresops.html", contexto)
+    else:
+        miForm = TorresOpsForm()
+    
+    return render(request, "entidades/torresForm.html", {"form": miForm})

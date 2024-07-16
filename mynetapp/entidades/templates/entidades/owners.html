@@ -8,8 +8,12 @@
 
 
 {% block titulo %}
- <h1 class="mt-4"> Owners  </h1>
- <h5 class="mt-4"> Listar/Filtrar responsables de proyectos y datos de contacto </h5>
+ <h1 class="mt-4"> Owners de Proyectos & Apps  </h1>
+ 
+ <form action= "{% url 'ownersForm' %}">
+    <input type="submit" value="Cargar Responsables" />
+ </form>
+
 
 {% endblock titulo %}
 
@@ -19,18 +23,18 @@
     <thead>
         <tr>
             <th>Id</th>
-            <th>resposables</th>
-            <th>proyecto</th>
-            <th>contacto</th>
+            <th>Responsable</th>
+            <th>Proyecto</th>
+            <th>Contacto</th>
         </tr>
     </thead>
     <tbody>
     {% for c in owners  %}
         <tr>
             <td>{{ c.id }}</td>
-            <td>{{ c.resposables }}</td>
-            <td>{{ c.proyecto }}</td>
-            <td>{{ c.contacto }}</td>
+            <td>{{ c.responsables_own }}</td>
+            <td>{{ c.proyecto_own }}</td>
+            <td>{{ c.contacto_own }}</td>
         </tr>
     {% endfor %}
     </tbody>

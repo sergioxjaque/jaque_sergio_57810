@@ -14,7 +14,12 @@ class Vlans(models.Model):
     vlan_desc = models.CharField(max_length=60)
 
 class Owners(models.Model):
-    resposables = models.CharField(max_length=60)
-    proyecto = models.CharField(max_length=60)
-    contacto = models.CharField(max_length=60)
+    responsables_own = models.CharField(max_length=60)
+    proyecto_own = models.CharField(max_length=60)
+    contacto_own = models.CharField(max_length=60)
+
+class TorresOps(models.Model):
+    operadores_ops = models.CharField(max_length=60)
+    team_ops = models.CharField(max_length=60)
+    contacto_ops = models.CharField(max_length=60)
 

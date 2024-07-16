@@ -8,11 +8,12 @@
 
 
 {% block titulo %}
- <h1 class="mt-4"> VLANS  </h1>
+ <h1 class="mt-4"> Admins & Operadores  </h1>
  
- <form action= "{% url 'vlansForm' %}">
-    <input type="submit" value="Cargar Vlans" />
+ <form action= "{% url 'torresForm' %}">
+    <input type="submit" value="Cargar Admins Ops" />
  </form>
+
 
 {% endblock titulo %}
 
@@ -22,18 +23,19 @@
     <thead>
         <tr>
             <th>Id</th>
-            <th>Vlan</th>
-            <th>Vlan TAG</th>
-            <th>Descripcion</th>
+            <th>Operadores</th>
+            <th>Team</th>
+            <th>Contacto</th>
         </tr>
     </thead>
     <tbody>
-    {% for c in vlans  %}
+    {% for c in torresops  %}
         <tr>
             <td>{{ c.id }}</td>
-            <td>{{ c.vlan_name }}</td>
-            <td>{{ c.vlan_tag }}</td>
-            <td>{{ c.vlan_desc }}</td>
+            <td>{{ c.operadores_ops }}</td>
+            <td>{{ c.team_ops }}</td>
+            <td>{{ c.contacto_ops }}</td>
+
         </tr>
     {% endfor %}
     </tbody>

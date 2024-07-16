@@ -11,4 +11,12 @@ class VlansForm(forms.Form):
     vlan_tag = forms.IntegerField(required=True, label="VLAN TAG")
     vlan_desc = forms.CharField(max_length=60)
 
-    
+class OwnersForm(forms.Form):
+    responsables_own = forms.CharField(max_length=50, required=True, label="Responsable")
+    proyecto_own = forms.CharField(max_length=50, required=True, label="Proyecto")
+    contacto_own = forms.CharField(max_length=50, required=True, label="Contacto")
+
+class TorresOpsForm(forms.Form):
+    operadores_ops = forms.CharField(max_length=50, required=True, label="Operador")
+    team_ops = forms.CharField(max_length=50, required=True, label="Equipo")
+    contacto_ops = forms.CharField(max_length=50, required=True, label="Contacto")
