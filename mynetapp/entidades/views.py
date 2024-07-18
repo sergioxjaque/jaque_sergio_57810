@@ -3,7 +3,8 @@ from .models import *
 
 from .forms import *
 
-# Create your views here.
+### FUNCIONES SIMPLES
+
 def home(request):
     return render(request, "entidades/index.html")
 
@@ -26,6 +27,10 @@ def torresops(request):
 def acerca(request):
     return render(request, "entidades/acerca.html")
 
+
+###------------- FORMS & ACCIONES POR ENTIDAD -------------
+### HOSTS
+
 def hostsForm(request):
     if request.method == "POST":
         miForm = HostsForm(request.POST)
@@ -42,6 +47,37 @@ def hostsForm(request):
     
     return render(request, "entidades/hostsForm.html", {"form": miForm})
 
+def buscarHosts(request):
+    return render(request, "entidades/buscarHosts.html")
+
+def listarHosts(request):
+    if request.GET["buscar"]:
+        patron = request.GET["buscar"]
+        hosts = Hosts.objects.filter(host_name__icontains=patron)
+        contexto = {'hosts': hosts}    
+    else:
+        contexto = {'hosts': Hosts.objects.all()}
+        
+    return render(request, "entidades/hosts.html", contexto)
+
+def hostsUpdate(request, id_hosts):
+    hosts = Hosts.objects.get(id=id_hosts)
+    if request.method == "POST":
+        miForm = HostsForm(request.POST)
+        if miForm.is_valid():
+            hosts.host_name = miForm.cleaned_data.get("host_name")
+            hosts.host_ip = miForm.cleaned_data.get("host_ip")
+            hosts.host_vlan = miForm.cleaned_data.get("host_vlan")
+            hosts.save()
+            contexto = {"hosts": Hosts.objects.all() }
+            return render(request, "entidades/hosts.html", contexto)       
+    else:
+        miForm = HostsForm(initial={"host_name": hosts.host_name, "host_ip": hosts.host_ip, "host_vlan":hosts.host_vlan }) 
+    
+    return render(request, "entidades/hostsForm.html", {"form": miForm})
+
+#_______________________________________________________________
+### VLANS
 
 def vlansForm(request):
     if request.method == "POST":
@@ -60,19 +96,10 @@ def vlansForm(request):
     return render(request, "entidades/vlansForm.html", {"form": miForm})
 
 
-def buscarHosts(request):
-    return render(request, "entidades/buscarHosts.html")
 
-def listarHosts(request):
-    if request.GET["buscar"]:
-        patron = request.GET["buscar"]
-        hosts = Hosts.objects.filter(host_name__icontains=patron)
-        contexto = {'hosts': hosts}    
-    else:
-        contexto = {'hosts': Hosts.objects.all()}
-        
-    return render(request, "entidades/hosts.html", contexto)
 
+#_______________________________________________________________
+### OWNERS 
 
 def ownersForm(request):
     if request.method == "POST":
@@ -90,6 +117,8 @@ def ownersForm(request):
     
     return render(request, "entidades/ownersForm.html", {"form": miForm})
 
+#_______________________________________________________________
+### CONTACTOS
 
 def torresopsForm(request):
     if request.method == "POST":

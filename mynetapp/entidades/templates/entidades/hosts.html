@@ -56,7 +56,7 @@
 
             <td>
                 <a
-                  href=""
+                  href="{% url 'hostsUpdate' c.id %}"
                   class="btn btn-primary"
                   style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
                   ><i class="fa fa-edit fa-sm" title="Edit Record"></i>
@@ -66,8 +66,8 @@
                 href=""
                 class="btn btn-primary"
                 style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                ><i class="fa-solid fa-gears" title="Check"></i>
                 
-                ><i class="fa-solid fa-circle-radiation" title="Check" ></i>
               </a>
 
                 <a
@@ -78,9 +78,6 @@
                 </a>
                 
               
-                
-
-
             </td>   
 
         </tr>
