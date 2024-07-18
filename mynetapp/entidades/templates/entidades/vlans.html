@@ -8,11 +8,18 @@
 
 
 {% block titulo %}
- <h1 class="mt-4"> VLANS  </h1>
- 
- <form action= "{% url 'vlansForm' %}">
-    <input type="submit" value="Cargar Vlans" />
- </form>
+ <table>
+    <tr>
+        <td width="200"><h2>Vlans</h2></td>
+        <td>
+            <a
+            href="{% url 'vlansForm' %}"
+            class="btn btn-primary btn-sm"
+            ><i class="fa fa-plus fa-lg" title="Crear"> </i>
+            </a>
+        </td>        
+    </tr>
+</table>
 
 {% endblock titulo %}
 
@@ -25,6 +32,7 @@
             <th>Vlan</th>
             <th>Vlan TAG</th>
             <th>Descripcion</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -34,6 +42,21 @@
             <td>{{ c.vlan_name }}</td>
             <td>{{ c.vlan_tag }}</td>
             <td>{{ c.vlan_desc }}</td>
+
+            <td>
+                <a
+                  href=""
+                  class="btn btn-primary"
+                  style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                  ><i class="fa fa-edit fa-sm" title="Edit Record"></i>
+                </a>
+                <a
+                  href=""
+                  class="btn btn-danger"
+                  style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                  ><i class="fa fa-trash fa-sm" title="Delete Record"></i>
+                </a>                
+            </td>   
         </tr>
     {% endfor %}
     </tbody>

@@ -17,6 +17,6 @@ class OwnersForm(forms.Form):
     contacto_own = forms.CharField(max_length=50, required=True, label="Contacto")
 
 class TorresOpsForm(forms.Form):
-    operadores_ops = forms.CharField(max_length=50, required=True, label="Operador")
+    operadores_ops = forms.CharField(max_length=50, required=True, label="Nombre")
     team_ops = forms.CharField(max_length=50, required=True, label="Equipo")
-    contacto_ops = forms.CharField(max_length=50, required=True, label="Contacto")
+    contacto_ops = forms.CharField(max_length=50, required=True, label="Mail")

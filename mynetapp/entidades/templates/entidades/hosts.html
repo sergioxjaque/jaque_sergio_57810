@@ -9,19 +9,32 @@
 
 
 {% block titulo %}
- <h1 class="mt-4"> Hosts </h1>
- 
- <form action= "{% url 'hostsForm' %}">
-    <input type="submit" value="Cargar Hosts" />
- </form>
 
- <form action= "{% url 'buscarHosts' %}">
-    <input type="submit" value="Buscar Hosts" />
- </form>
 
 {% endblock titulo %}
 
 {% block contenido %}
+
+<table>
+    <tr>
+        <td width="200"><h2>Hosts</h2></td>
+        <td>
+            <a
+            href="{% url 'hostsForm' %}"
+            class="btn btn-primary btn-sm"
+            ><i class="fa fa-plus fa-lg" title="Crear"> </i>
+            </a>
+        </td>        
+        <td>
+            <a
+            href="{% url 'buscarHosts' %}"
+            class="btn btn-primary btn-sm"
+            ><i class="fa-solid fa-magnifying-glass" title="Buscar"></i>
+           
+            </a>
+        </td>  
+    </tr>
+</table>
 
 <table class="table table-striped">
     <thead>
@@ -30,6 +43,7 @@
             <th>Hostname</th>
             <th>IP</th>
             <th>Vlan</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -39,6 +53,36 @@
             <td>{{ c.host_name }}</td>
             <td>{{ c.host_ip }}</td>
             <td>{{ c.host_vlan }}</td>
+
+            <td>
+                <a
+                  href=""
+                  class="btn btn-primary"
+                  style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                  ><i class="fa fa-edit fa-sm" title="Edit Record"></i>
+                </a>
+
+                <a
+                href=""
+                class="btn btn-primary"
+                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                
+                ><i class="fa-solid fa-circle-radiation" title="Check" ></i>
+              </a>
+
+                <a
+                  href=""
+                  class="btn btn-danger"
+                  style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                  ><i class="fa fa-trash fa-sm" title="Delete Record"></i>
+                </a>
+                
+              
+                
+
+
+            </td>   
+
         </tr>
     {% endfor %}
     </tbody>
