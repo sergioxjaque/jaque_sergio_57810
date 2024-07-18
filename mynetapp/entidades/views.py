@@ -76,6 +76,12 @@ def hostsUpdate(request, id_hosts):
     
     return render(request, "entidades/hostsForm.html", {"form": miForm})
 
+def hostsDelete(request, id_hosts):
+    hosts = Hosts.objects.get(id=id_hosts)
+    hosts.delete()
+    contexto = {"hosts": Hosts.objects.all() }
+    return render(request, "entidades/hosts.html", contexto)  
+
 #_______________________________________________________________
 ### VLANS
 

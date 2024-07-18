@@ -12,6 +12,8 @@ urlpatterns = [
     path('buscarHosts/', buscarHosts, name="buscarHosts"),
     path('listarHosts/', listarHosts, name="listarHosts"),
     path('hostsUpdate/<id_hosts>', hostsUpdate, name="hostsUpdate"),
+    path('hostsDelete/<id_hosts>', hostsDelete, name="hostsDelete"),
+    
 
 #________________________________________________________
 ## VLANS:
