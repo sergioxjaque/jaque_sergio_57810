@@ -1,0 +1,65 @@
+{% extends "entidades/index.html" %}
+
+<ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+    <li class="nav-item active"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+   
+</ul>
+
+
+
+{% block titulo %}
+ <table>
+    <tr>
+        <td width="200"><h2>Vlans</h2></td>
+        <td>
+            <a
+            href="{% url 'vlansCreate' %}"
+            class="btn btn-primary btn-sm"
+            ><i class="fa fa-plus fa-lg" title="Crear"> </i>
+            </a>
+        </td>        
+    </tr>
+</table>
+
+{% endblock titulo %}
+
+{% block contenido %}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Vlan</th>
+            <th>Vlan TAG</th>
+            <th>Descripcion</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for e in vlans_list  %}
+        <tr>
+            <td>{{ e.id }}</td>
+            <td>{{ e.nombre }}</td>
+            <td>{{ e.vlan_TAG }}</td>
+            <td>{{ e.descripcion }}</td>
+
+            <td>
+                <a
+                  href="{% url 'vlansUpdate' e.id %}"
+                  class="btn btn-primary"
+                  style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                  ><i class="fa fa-edit fa-sm" title="Edit Record"></i>
+                </a>
+                <a
+                  href="{% url 'vlansDelete' e.id %}"
+                  class="btn btn-danger"
+                  style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                  ><i class="fa fa-trash fa-sm" title="Delete Record"></i>
+                </a>                
+            </td>   
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+     
+{% endblock contenido %}

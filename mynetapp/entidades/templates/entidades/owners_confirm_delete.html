@@ -1,0 +1,29 @@
+{% extends "entidades/index.html" %}
+
+<ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+    <li class="nav-item active"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+   
+</ul>
+
+
+
+{% block titulo %}
+ <h1 class="mt-4"> Owners </h1>
+
+
+{% endblock titulo %}
+
+{% block contenido %}
+
+<form action="" method="post">
+    {% csrf_token %}   
+    <div class="text-center">     
+        <h5>¿ Esta seguro de eliminar el contacto ? <p style="color:red"> {{ object.contacto }}</p> </h5>
+        <h5> Correspondiente a: <p style="color:red">{{ object.responsables }} </p> </h5>
+    </div>
+    <div class="text-center">
+        <input type="submit" class="btn btn-primary btn-block" value="Eliminar">
+    </div>
+</form>
+  
+{% endblock contenido %}

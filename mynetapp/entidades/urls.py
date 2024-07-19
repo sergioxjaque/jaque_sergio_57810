@@ -17,18 +17,28 @@ urlpatterns = [
 
 #________________________________________________________
 ## VLANS:
-    path('vlans/', vlans, name="vlans"),
-    path('vlansForm/', vlansForm, name="vlansForm"),
+   
+    #path('vlansForm/', vlansForm, name="vlansForm"),
+
+    path('vlans/', VlansList.as_view(), name="vlans"),    
+    path('vlansCreate/', VlansCreate.as_view(), name="vlansCreate"), 
+    path('vlansUpdate/<int:pk>/', VlansUpdate.as_view(), name="vlansUpdate"), 
+    path('vlansDelete/<int:pk>/', VlansDelete.as_view(), name="vlansDelete"),
 
 #________________________________________________________
-## OWNERS:
-    path('owners/', owners, name="owners"),
-    path('ownersForm/', ownersForm, name="ownersForm"),
+## OWNERS DE PROYECTOS O APPS:
+  
+    path('owners/', OwnersList.as_view(), name="owners"),    
+    path('ownersCreate/', OwnersCreate.as_view(), name="ownersCreate"), 
+    path('ownersUpdate/<int:pk>/', OwnersUpdate.as_view(), name="ownersUpdate"), 
+    path('ownersDelete/<int:pk>/', OwnersDelete.as_view(), name="ownersDelete"),
 
 #________________________________________________________
-## CONTACTOS:
-
-    path('torresops/', torresops, name="torresops"),
-    path('torresForm/', torresopsForm, name="torresForm"),
+## CONTACTOS POR TORRES DE OPERACIONES:
+    path('torresops/', TorresOpsList.as_view(), name="torresops"),    
+    path('torresopsCreate/', TorresOpsCreate.as_view(), name="torresopsCreate"), 
+    path('torresopsUpdate/<int:pk>/', TorresOpsUpdate.as_view(), name="torresopsUpdate"), 
+    path('torresopsDelete/<int:pk>/', TorresOpsDelete.as_view(), name="torresopsDelete"),
+    
 #________________________________________________________
 ]
