@@ -20,13 +20,23 @@
             <div class="border-end bg-white" id="sidebar-wrapper">
                 <div class="sidebar-heading border-bottom bg-light">New Networkings</div>
                 <div class="list-group list-group-flush">
+
+            {% if user.is_authenticated %}
+                
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'hosts' %}">Hosts</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'vlans' %}">Vlans</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'owners' %}">Owners</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'torresops' %}">Torres</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'acerca' %}">acerca</a>
+                    <p style="color:blue"> [{{user.first_name}} {{user.last_name}}]</p>
                     
+                
+            {% else %}
+                <a class="btn btn-primary" href="{% url 'login' %}">Login</a>
+                
+            {% endif %}
                 </div>
+
             </div>
             <!-- Page content wrapper-->
             <div id="page-content-wrapper">

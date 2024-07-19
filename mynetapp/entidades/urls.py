@@ -39,6 +39,13 @@ urlpatterns = [
     path('torresopsCreate/', TorresOpsCreate.as_view(), name="torresopsCreate"), 
     path('torresopsUpdate/<int:pk>/', TorresOpsUpdate.as_view(), name="torresopsUpdate"), 
     path('torresopsDelete/<int:pk>/', TorresOpsDelete.as_view(), name="torresopsDelete"),
-    
+
+
+# _________________________________________________________________ 
+### LOGIN/OUT
+    path('login/', loginRequest, name="login"),
+   # path('logout/', LogoutView.as_view(template_name="entidades/logout.html"), name="logout"),
+   # path('registro/', register, name="registro"),
+
 #________________________________________________________
 ]

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from django.urls import reverse_lazy
 from .models import *
@@ -9,6 +9,12 @@ from django.views.generic import CreateView
 from django.views.generic import UpdateView
 from django.views.generic import DeleteView
 
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import AuthenticationForm
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+
 ### FUNCIONES SIMPLES
 
 def home(request):
@@ -18,15 +24,12 @@ def hosts(request):
      contexto = {"hosts": Hosts.objects.all()}
      return render(request, "entidades/hosts.html", contexto)
 
-
-
 def torresops(request):
     contexto = {"torresops": TorresOps.objects.all()}
     return render(request, "entidades/torresops.html", contexto)
 
 def acerca(request):
     return render(request, "entidades/acerca.html")
-
 
 ###------------- FORMS & ACCIONES POR ENTIDAD -------------
 ### HOSTS
@@ -145,3 +148,24 @@ class TorresOpsDelete(DeleteView):
     success_url = reverse_lazy("torres")
 
 
+
+# _________________________________________________________________ 
+### LOGIN/OUT
+
+def loginRequest(request):
+    if request.method == "POST":
+        usuario = request.POST["username"]
+        clave = request.POST["password"]
+        user = authenticate(request, username=usuario, password=clave)
+        if user is not None:
+            login(request, user)
+            return render(request, "entidades/index.html")
+        else:
+            return redirect(reverse_lazy('login'))
+
+    else:
+        miForm = AuthenticationForm()
+
+    return render(request, "entidades/login.html", {"form": miForm})
+
+  
