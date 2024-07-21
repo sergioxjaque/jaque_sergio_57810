@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-
 from django.urls import reverse_lazy
+
 from .models import *
 from .forms import *
 
@@ -12,7 +12,10 @@ from django.views.generic import DeleteView
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 
+## APLICAN SOBRE LAS CLASES
 from django.contrib.auth.mixins import LoginRequiredMixin
+
+## APLICAN SOBRE LAS FUNCIONES
 from django.contrib.auth.decorators import login_required
 
 ### FUNCIONES SIMPLES
@@ -20,13 +23,16 @@ from django.contrib.auth.decorators import login_required
 def home(request):
     return render(request, "entidades/index.html")
 
+@login_required
 def hosts(request):
      contexto = {"hosts": Hosts.objects.all()}
      return render(request, "entidades/hosts.html", contexto)
 
+@login_required
 def torresops(request):
     contexto = {"torresops": TorresOps.objects.all()}
     return render(request, "entidades/torresops.html", contexto)
+
 
 def acerca(request):
     return render(request, "entidades/acerca.html")
@@ -34,6 +40,7 @@ def acerca(request):
 ###------------- FORMS & ACCIONES POR ENTIDAD -------------
 ### HOSTS
 
+@login_required
 def hostsForm(request):
     if request.method == "POST":
         miForm = HostsForm(request.POST)
@@ -50,9 +57,11 @@ def hostsForm(request):
     
     return render(request, "entidades/hostsForm.html", {"form": miForm})
 
+@login_required
 def buscarHosts(request):
     return render(request, "entidades/buscarHosts.html")
 
+@login_required
 def listarHosts(request):
     if request.GET["buscar"]:
         patron = request.GET["buscar"]
@@ -63,6 +72,7 @@ def listarHosts(request):
         
     return render(request, "entidades/hosts.html", contexto)
 
+@login_required
 def hostsUpdate(request, id_hosts):
     hosts = Hosts.objects.get(id=id_hosts)
     if request.method == "POST":
@@ -79,6 +89,7 @@ def hostsUpdate(request, id_hosts):
     
     return render(request, "entidades/hostsForm.html", {"form": miForm})
 
+@login_required
 def hostsDelete(request, id_hosts):
     hosts = Hosts.objects.get(id=id_hosts)
     hosts.delete()
@@ -88,20 +99,20 @@ def hostsDelete(request, id_hosts):
 #_______________________________________________________________
 ### VLANS
 
-class VlansList(ListView):
+class VlansList(LoginRequiredMixin, ListView):
     model = Vlans
 
-class VlansCreate(CreateView):
-    model = Vlans
-    fields = ["nombre", "vlan_TAG", "descripcion"]
-    success_url = reverse_lazy("vlans")
-
-class VlansUpdate(UpdateView):
+class VlansCreate(LoginRequiredMixin, CreateView):
     model = Vlans
     fields = ["nombre", "vlan_TAG", "descripcion"]
     success_url = reverse_lazy("vlans")
 
-class VlansDelete(DeleteView):
+class VlansUpdate(LoginRequiredMixin, UpdateView):
+    model = Vlans
+    fields = ["nombre", "vlan_TAG", "descripcion"]
+    success_url = reverse_lazy("vlans")
+
+class VlansDelete(LoginRequiredMixin, DeleteView):
     model = Vlans
     success_url = reverse_lazy("vlans")
 
@@ -109,20 +120,20 @@ class VlansDelete(DeleteView):
 #_______________________________________________________________
 ### OWNERS 
 
-class OwnersList(ListView):
+class OwnersList(LoginRequiredMixin, ListView):
     model = Owners
 
-class OwnersCreate(CreateView):
-    model = Owners
-    fields = ["responsables", "proyecto", "contacto"]
-    success_url = reverse_lazy("owners")
-
-class OwnersUpdate(UpdateView):
+class OwnersCreate(LoginRequiredMixin, CreateView):
     model = Owners
     fields = ["responsables", "proyecto", "contacto"]
     success_url = reverse_lazy("owners")
 
-class OwnersDelete(DeleteView):
+class OwnersUpdate(LoginRequiredMixin, UpdateView):
+    model = Owners
+    fields = ["responsables", "proyecto", "contacto"]
+    success_url = reverse_lazy("owners")
+
+class OwnersDelete(LoginRequiredMixin, DeleteView):
     model = Owners
     success_url = reverse_lazy("owners")
 
@@ -130,20 +141,20 @@ class OwnersDelete(DeleteView):
 #_______________________________________________________________
 ### CONTACTOS
 
-class TorresOpsList(ListView):
+class TorresOpsList(LoginRequiredMixin, ListView):
     model = TorresOps
 
-class TorresOpsCreate(CreateView):
-    model = TorresOps
-    fields = ["operadores", "team", "contacto"]
-    success_url = reverse_lazy("torres")
-
-class TorresOpsUpdate(UpdateView):
+class TorresOpsCreate(LoginRequiredMixin, CreateView):
     model = TorresOps
     fields = ["operadores", "team", "contacto"]
     success_url = reverse_lazy("torres")
 
-class TorresOpsDelete(DeleteView):
+class TorresOpsUpdate(LoginRequiredMixin, UpdateView):
+    model = TorresOps
+    fields = ["operadores", "team", "contacto"]
+    success_url = reverse_lazy("torres")
+
+class TorresOpsDelete(LoginRequiredMixin, DeleteView):
     model = TorresOps
     success_url = reverse_lazy("torres")
 
@@ -169,3 +180,13 @@ def loginRequest(request):
     return render(request, "entidades/login.html", {"form": miForm})
 
   
+def register(request):
+    if request.method == "POST":
+        miForm = RegistroForm(request.POST)
+        if miForm.is_valid():
+            miForm.save()
+            return redirect(reverse_lazy('home'))
+    else:
+        miForm = RegistroForm()
+
+    return render(request, "entidades/registro.html", {"form": miForm}) 

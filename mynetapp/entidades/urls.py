@@ -2,6 +2,10 @@
 from django.urls import path, include
 from entidades.views import *
 
+from django.contrib.auth.views import LogoutView
+
+
+
 urlpatterns = [
     path('', home, name="home"),    
     path('acerca/', acerca, name="acerca"),
@@ -44,8 +48,7 @@ urlpatterns = [
 # _________________________________________________________________ 
 ### LOGIN/OUT
     path('login/', loginRequest, name="login"),
-   # path('logout/', LogoutView.as_view(template_name="entidades/logout.html"), name="logout"),
-   # path('registro/', register, name="registro"),
-
-#________________________________________________________
+    path('logout/', LogoutView.as_view(template_name="entidades/logout.html"), name="logout"),
+    path('registro/', register, name="registro"), 
 ]
+
