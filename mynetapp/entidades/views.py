@@ -147,16 +147,16 @@ class TorresOpsList(LoginRequiredMixin, ListView):
 class TorresOpsCreate(LoginRequiredMixin, CreateView):
     model = TorresOps
     fields = ["operadores", "team", "contacto"]
-    success_url = reverse_lazy("torres")
+    success_url = reverse_lazy("torresops")
 
 class TorresOpsUpdate(LoginRequiredMixin, UpdateView):
     model = TorresOps
     fields = ["operadores", "team", "contacto"]
-    success_url = reverse_lazy("torres")
+    success_url = reverse_lazy("torresops")
 
 class TorresOpsDelete(LoginRequiredMixin, DeleteView):
     model = TorresOps
-    success_url = reverse_lazy("torres")
+    success_url = reverse_lazy("torresops")
 
 
 
